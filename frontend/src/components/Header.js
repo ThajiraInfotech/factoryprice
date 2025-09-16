@@ -80,6 +80,7 @@ const Header = () => {
                 size="icon"
                 onClick={toggleTheme}
                 className="text-white/70 hover:text-white hover:bg-white/10"
+                title={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
