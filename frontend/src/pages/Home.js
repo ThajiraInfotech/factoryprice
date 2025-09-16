@@ -59,7 +59,9 @@ const Home = () => {
   const featuredProducts = products.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className={`min-h-screen transition-colors duration-300 ${
+      isDark ? 'bg-black text-white' : 'bg-white text-black'
+    }`}>
       {/* Offers Banner */}
       <section className="bg-red-600 text-white py-3 px-4">
         <div className="max-w-7xl mx-auto">
