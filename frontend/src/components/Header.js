@@ -21,7 +21,11 @@ const Header = () => {
 
   return (
     <>
-      <header className="dark-header fixed top-0 w-full z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+      <header className={`fixed top-0 w-full z-50 backdrop-blur-sm border-b transition-colors duration-300 ${
+        isDark 
+          ? 'bg-black/95 border-white/10 text-white' 
+          : 'bg-white/95 border-gray-200 text-black'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -33,10 +37,12 @@ const Header = () => {
               </div>
               <div className="hidden sm:block">
                 <div className="text-xl font-semibold">
-                  <span className="text-white">factory</span>
+                  <span className={isDark ? 'text-white' : 'text-black'}>factory</span>
                   <span className="text-cyan-400 ml-1">Price</span>
                 </div>
-                <div className="text-sm text-white/70 tracking-wider">Mobile Store</div>
+                <div className={`text-sm tracking-wider ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  Mobile Store
+                </div>
               </div>
             </Link>
 
@@ -49,7 +55,9 @@ const Header = () => {
                   className={`nav-text transition-colors duration-300 ${
                     isActive(item.path)
                       ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
-                      : 'text-white/70 hover:text-white'
+                      : isDark 
+                        ? 'text-white/70 hover:text-white' 
+                        : 'text-gray-600 hover:text-black'
                   }`}
                 >
                   {item.name}
@@ -62,7 +70,11 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white/70 hover:text-white hover:bg-white/10"
+                className={`transition-colors duration-300 ${
+                  isDark 
+                    ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                    : 'text-gray-600 hover:text-black hover:bg-gray-100'
+                }`}
               >
                 <Search className="h-5 w-5" />
               </Button>
@@ -70,7 +82,11 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white/70 hover:text-white hover:bg-white/10"
+                className={`transition-colors duration-300 ${
+                  isDark 
+                    ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                    : 'text-gray-600 hover:text-black hover:bg-gray-100'
+                }`}
               >
                 <ShoppingCart className="h-5 w-5" />
               </Button>
@@ -79,7 +95,11 @@ const Header = () => {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="text-white/70 hover:text-white hover:bg-white/10"
+                className={`transition-colors duration-300 ${
+                  isDark 
+                    ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                    : 'text-gray-600 hover:text-black hover:bg-gray-100'
+                }`}
                 title={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -89,7 +109,11 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-white/70 hover:text-white hover:bg-white/10"
+                className={`lg:hidden transition-colors duration-300 ${
+                  isDark 
+                    ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                    : 'text-gray-600 hover:text-black hover:bg-gray-100'
+                }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -100,7 +124,11 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-black/95 backdrop-blur-sm border-t border-white/10">
+          <div className={`lg:hidden backdrop-blur-sm border-t transition-colors duration-300 ${
+            isDark 
+              ? 'bg-black/95 border-white/10' 
+              : 'bg-white/95 border-gray-200'
+          }`}>
             <nav className="px-4 py-6 space-y-4">
               {navItems.map((item) => (
                 <Link
@@ -109,7 +137,9 @@ const Header = () => {
                   className={`block text-lg transition-colors duration-300 ${
                     isActive(item.path)
                       ? 'text-cyan-400'
-                      : 'text-white/70 hover:text-white'
+                      : isDark 
+                        ? 'text-white/70 hover:text-white' 
+                        : 'text-gray-600 hover:text-black'
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
