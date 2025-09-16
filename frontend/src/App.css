@@ -1,34 +1,269 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* UIX Labs Dark Theme Styles */
+
+:root {
+  /* Backgrounds - Dark Theme Foundation */
+  --bg-primary: #000000;           /* Main page background */
+  --bg-secondary: #121212;         /* Card/section backgrounds */
+  --bg-overlay: rgba(255, 255, 255, 0.1); /* Subtle overlays */
+  
+  /* Text - High Contrast for Dark Theme */
+  --text-primary: #FFFFFF;         /* Main headings and content */
+  --text-secondary: rgba(255, 255, 255, 0.85); /* Supporting text */
+  --text-muted: #4D4D4D;           /* Muted text, navigation */
+  
+  /* Borders - Subtle Dark Theme */
+  --border-subtle: rgba(255, 255, 255, 0.25); /* Subtle separators */
+  --border-medium: rgba(255, 255, 255, 0.4);  /* Standard borders */
+  
+  /* MAIN ACCENT COLORS - Brand Colors Only */
+  --brand-primary: #00FFD1;        /* Primary brand cyan-green */
+  --brand-hover: rgba(0, 255, 209, 0.1); /* Hover backgrounds */
+  --brand-active: #6FD2C0;         /* Active states */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Dark Theme Grid and Layout */
+.dark-container {
+  background: var(--bg-primary);
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 1px, transparent 1px, transparent 7.6923%),
+    repeating-linear-gradient(-90deg, #fff, #fff 1px, transparent 1px, transparent 7.6923%);
+  background-size: 100% 100%;
+  opacity: 0.14;
+  position: relative;
+  min-height: 100vh;
+  padding: 80px 7.6923% 0;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Typography System - Dark Theme */
+.display-huge { 
+  font-size: 66px; 
+  font-weight: 600; 
+  line-height: 1.1; 
+  letter-spacing: -0.62px; 
+  color: var(--text-primary); 
 }
 
-.App-link {
-    color: #61dafb;
+.display-large { 
+  font-size: 48px; 
+  font-weight: 600; 
+  line-height: 1.1; 
+  letter-spacing: -0.02em; 
+  color: var(--text-primary); 
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.display-medium { 
+  font-size: 32px; 
+  font-weight: 600; 
+  line-height: 1.25; 
+  letter-spacing: -0.01em; 
+  color: var(--text-primary); 
+}
+
+.heading-1 { 
+  font-size: 28px; 
+  font-weight: 600; 
+  line-height: 1.2; 
+  letter-spacing: -0.005em; 
+  color: var(--text-primary); 
+}
+
+.heading-2 { 
+  font-size: 24px; 
+  font-weight: 600; 
+  line-height: 1.3; 
+  letter-spacing: -0.02em; 
+  color: var(--text-primary); 
+}
+
+.heading-3 { 
+  font-size: 20px; 
+  font-weight: 600; 
+  line-height: 1.4; 
+  letter-spacing: 0; 
+  color: var(--text-primary); 
+}
+
+.body-large { 
+  font-size: 20px; 
+  font-weight: 500; 
+  line-height: 1.5; 
+  letter-spacing: 0; 
+  color: var(--text-primary); 
+}
+
+.body-medium { 
+  font-size: 18px; 
+  font-weight: 400; 
+  line-height: 1.5; 
+  letter-spacing: 0; 
+  color: var(--text-secondary); 
+}
+
+.body-small { 
+  font-size: 16px; 
+  font-weight: 400; 
+  line-height: 1.4; 
+  letter-spacing: 0; 
+  color: var(--text-secondary); 
+}
+
+.body-muted { 
+  font-size: 16px; 
+  font-weight: 400; 
+  line-height: 1.4; 
+  letter-spacing: 0; 
+  color: var(--text-muted); 
+}
+
+/* Button Styles - Sharp Edges */
+.btn-primary {
+  background: var(--brand-primary);
+  color: #000000;
+  border: none;
+  border-radius: 0px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  min-height: 56px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.btn-primary:hover {
+  background: var(--brand-hover);
+  color: var(--brand-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 255, 209, 0.3);
+}
+
+.btn-primary:active {
+  background: var(--brand-active);
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  min-height: 56px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.btn-secondary:hover {
+  background: #FFFFFF;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  background: #F0F0F0;
+  transform: scale(0.98);
+}
+
+/* Animation System */
+.dark-transition {
+  transition: all 0.4s ease-in-out;
+}
+
+.dark-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 255, 209, 0.2);
+}
+
+.dark-button-animate {
+  transition: all 0.4s ease-in-out;
+}
+
+.dark-button-animate:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 255, 209, 0.3);
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-delayed {
+  animation: fadeIn 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delayed-2 {
+  animation: fadeIn 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .display-huge { font-size: 42px; }
+  .display-large { font-size: 36px; }
+  .display-medium { font-size: 28px; }
+}
+
+@media (max-width: 480px) {
+  .display-huge { font-size: 32px; }
+  .display-large { font-size: 28px; }
+  .display-medium { font-size: 24px; }
+  .body-large { font-size: 18px; }
+}
+
+/* Utility Classes */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
