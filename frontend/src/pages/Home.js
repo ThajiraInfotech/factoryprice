@@ -187,11 +187,17 @@ const Home = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className={`py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
+        isDark ? 'bg-black' : 'bg-white'
+      }`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-6 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Featured Products</h2>
-            <p className="text-lg text-white/70">
+            <h2 className={`text-3xl md:text-4xl font-bold transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-black'
+            }`}>Featured Products</h2>
+            <p className={`text-lg transition-colors duration-300 ${
+              isDark ? 'text-white/70' : 'text-gray-600'
+            }`}>
               Top-selling mobile accessories with premium quality at factory prices
             </p>
           </div>
@@ -220,12 +226,18 @@ const Home = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
+      <section className={`py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
+        isDark ? 'bg-zinc-900/30' : 'bg-gray-50'
+      }`}>
         <div className="max-w-4xl mx-auto text-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">Stay Updated</h2>
-              <p className="text-lg text-white/70">
+              <h2 className={`text-3xl md:text-4xl font-bold transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-black'
+              }`}>Stay Updated</h2>
+              <p className={`text-lg transition-colors duration-300 ${
+                isDark ? 'text-white/70' : 'text-gray-600'
+              }`}>
                 Subscribe for latest products, deals, and exclusive offers
               </p>
             </div>
@@ -234,7 +246,11 @@ const Home = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 bg-zinc-800 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-cyan-400 transition-colors duration-300"
+                className={`flex-1 px-6 py-4 border rounded-lg focus:outline-none focus:border-cyan-400 transition-colors duration-300 ${
+                  isDark 
+                    ? 'bg-zinc-800 border-white/20 text-white placeholder-white/50' 
+                    : 'bg-white border-gray-300 text-black placeholder-gray-500'
+                }`}
               />
               <Button className="btn-primary px-8 py-4 h-auto">
                 Subscribe
