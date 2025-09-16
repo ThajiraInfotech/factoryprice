@@ -4,8 +4,10 @@ import { ChevronLeft, ChevronRight, Battery, Zap, Smartphone, Plug, Sparkles, Ca
 import ProductCard from '../components/ProductCard';
 import { products, categories } from '../data/mockData';
 import { Button } from '../components/ui/button';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Home = () => {
+  const { isDark } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const carouselImages = [
