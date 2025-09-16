@@ -1,7 +1,9 @@
 import React from 'react';
 import { Award, Users, Target, Heart } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const About = () => {
+  const { isDark } = useTheme();
   const values = [
     {
       icon: Award,
