@@ -137,11 +137,17 @@ const Home = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
+      <section className={`py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
+        isDark ? 'bg-zinc-900/30' : 'bg-gray-50'
+      }`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-6 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Browse Categories</h2>
-            <p className="text-lg text-white/70">
+            <h2 className={`text-3xl md:text-4xl font-bold transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-black'
+            }`}>Browse Categories</h2>
+            <p className={`text-lg transition-colors duration-300 ${
+              isDark ? 'text-white/70' : 'text-gray-600'
+            }`}>
               Discover our complete range of premium mobile accessories
             </p>
           </div>
@@ -153,12 +159,24 @@ const Home = () => {
                 <Link
                   key={category.id}
                   to={category.path}
-                  className="group text-center p-6 rounded-xl border border-white/10 bg-zinc-800/50 hover:border-cyan-400/50 hover:bg-zinc-700/50 transition-all duration-300"
+                  className={`group text-center p-6 rounded-xl border transition-all duration-300 ${
+                    isDark 
+                      ? 'border-white/10 bg-zinc-800/50 hover:border-cyan-400/50 hover:bg-zinc-700/50' 
+                      : 'border-gray-200 bg-white hover:border-cyan-400/50 hover:bg-gray-50'
+                  }`}
                 >
-                  <div className="w-16 h-16 mx-auto mb-4 bg-zinc-700/50 rounded-full flex items-center justify-center group-hover:bg-cyan-400/20 transition-colors duration-300">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                    isDark 
+                      ? 'bg-zinc-700/50 group-hover:bg-cyan-400/20' 
+                      : 'bg-gray-100 group-hover:bg-cyan-400/20'
+                  }`}>
                     <IconComponent className="h-8 w-8 text-cyan-400" />
                   </div>
-                  <h3 className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors duration-300">
+                  <h3 className={`text-sm font-medium transition-colors duration-300 ${
+                    isDark 
+                      ? 'text-white group-hover:text-cyan-400' 
+                      : 'text-black group-hover:text-cyan-400'
+                  }`}>
                     {category.name}
                   </h3>
                 </Link>
