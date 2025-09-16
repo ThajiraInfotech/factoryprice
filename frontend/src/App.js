@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Products from "./pages/Products";
 import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
+import ProductDetails from "./pages/ProductDetails";
 
 const AppContent = () => {
   const { isDark } = useTheme();
@@ -26,6 +27,7 @@ const AppContent = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
           </Routes>
         </main>
         <Footer />
