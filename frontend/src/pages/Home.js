@@ -1,10 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Battery, Zap, Smartphone, Plug, Sparkles, Cable, Wallet } from 'lucide-react';
-import { categories } from '../data/mockData';
+import { ChevronLeft, ChevronRight, Battery, Zap, Smartphone, Plug, Sparkles, Cable, Wallet } from 'lucide-react';
+import ProductCard from '../components/ProductCard';
+import { products, categories } from '../data/mockData';
 import { Button } from '../components/ui/button';
 
 const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const carouselImages = [
+    {
+      id: 1,
+      image: "https://images.unsplash.com/photo-1590658165737-15a047b7de3c?w=1200&h=600&fit=crop",
+      title: "Premium Wireless Neckbands",
+      subtitle: "Starting from ₹2,499"
+    },
+    {
+      id: 2, 
+      image: "https://images.unsplash.com/photo-1609592842909-b4113c0e3fa4?w=1200&h=600&fit=crop",
+      title: "Fast Charging Power Banks",
+      subtitle: "20000mAh from ₹1,899"
+    },
+    {
+      id: 3,
+      image: "https://images.unsplash.com/photo-1606400082777-ef05f3c5cde2?w=1200&h=600&fit=crop", 
+      title: "True Wireless Earbuds",
+      subtitle: "Premium TWS from ₹3,299"
+    }
+  ];
+
   const categoryIcons = {
     "Powerbanks": Battery,
     "Wireless Chargers": Zap,
@@ -15,130 +39,116 @@ const Home = () => {
     "Phone Wallet": Wallet
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [carouselImages.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  const featuredProducts = products.slice(0, 3);
+
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section with Large Product Display */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-black"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black"></div>
-        
-        {/* Main Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-screen py-32">
-            
-            {/* Left Side - Text Content */}
-            <div className="space-y-8 text-left lg:text-left">
-              <div className="space-y-6">
-                <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="block text-white">India's Favourite</span>
-                  <span className="block text-cyan-400">Mobile Accessories</span>
-                  <span className="block text-white text-4xl lg:text-5xl mt-4">starting from ₹749!</span>
-                </h1>
-                
-                <p className="text-xl text-white/80 max-w-2xl leading-relaxed">
-                  Premium quality neckbands, power banks, and TWS earbuds at factory prices. 
-                  Experience superior quality without the premium markup.
-                </p>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-6">
-                <Link to="/shop">
-                  <Button className="btn-primary text-xl px-10 py-5 h-auto text-black font-semibold">
-                    Shop Now
-                    <ChevronRight className="ml-3 h-6 w-6" />
-                  </Button>
-                </Link>
-                <Link to="/products">
-                  <Button className="btn-secondary text-xl px-10 py-5 h-auto">
-                    View Products
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Stats */}
-              <div className="flex flex-wrap gap-12 pt-8">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-cyan-400">50K+</div>
-                  <div className="text-white/70 text-lg">Happy Customers</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-cyan-400">100+</div>
-                  <div className="text-white/70 text-lg">Products</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-cyan-400">99%</div>
-                  <div className="text-white/70 text-lg">Satisfaction</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - Product Showcase */}
-            <div className="relative">
-              <div className="relative w-full h-96 lg:h-[600px] bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl overflow-hidden border border-white/10">
-                {/* Neon Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-transparent to-blue-500/10"></div>
-                <div className="absolute top-4 left-4 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-4 right-4 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl"></div>
-                
-                {/* Product Images Placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center p-8">
-                  <div className="text-center space-y-8">
-                    <div className="relative">
-                      <div className="w-64 h-64 bg-gradient-to-br from-zinc-700 to-zinc-800 rounded-2xl flex items-center justify-center border border-cyan-400/30">
-                        <div className="text-center space-y-4">
-                          <div className="w-16 h-16 bg-cyan-400/20 rounded-xl mx-auto flex items-center justify-center">
-                            <Battery className="h-8 w-8 text-cyan-400" />
-                          </div>
-                          <div className="space-y-2">
-                            <h3 className="text-xl font-semibold text-white">Premium Accessories</h3>
-                            <p className="text-sm text-white/70">Neckbands • Power Banks • TWS Earbuds</p>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Glow Ring Effect */}
-                      <div className="absolute inset-0 rounded-2xl border-2 border-cyan-400/50 animate-pulse"></div>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="w-16 h-16 bg-zinc-700 rounded-lg flex items-center justify-center border border-white/10">
-                        <Zap className="h-6 w-6 text-cyan-400" />
-                      </div>
-                      <div className="w-16 h-16 bg-zinc-700 rounded-lg flex items-center justify-center border border-white/10">
-                        <Smartphone className="h-6 w-6 text-cyan-400" />
-                      </div>
-                      <div className="w-16 h-16 bg-zinc-700 rounded-lg flex items-center justify-center border border-white/10">
-                        <Battery className="h-6 w-6 text-cyan-400" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* Offers Banner */}
+      <section className="bg-red-600 text-white py-3 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center">
+            <div className="text-center font-semibold">
+              🎉 India's Favourite Power banks, starting from ₹749! 🎉
             </div>
           </div>
         </div>
       </section>
 
-      {/* Product Categories Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
+      {/* Image Carousel - Half Height */}
+      <section className="relative w-full h-96 overflow-hidden">
+        <div className="absolute inset-0">
+          {carouselImages.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <div className="relative w-full h-full bg-gradient-to-r from-black via-zinc-900 to-black">
+                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="relative z-10 flex items-center justify-center h-full">
+                  <div className="text-center space-y-4">
+                    <h2 className="text-4xl md:text-6xl font-bold text-white">
+                      {slide.title}
+                    </h2>
+                    <p className="text-xl md:text-2xl text-cyan-400 font-semibold">
+                      {slide.subtitle}
+                    </p>
+                    <Link to="/shop">
+                      <Button className="btn-primary mt-6 text-lg px-8 py-3">
+                        Shop Now
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 z-20"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 z-20"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+
+        {/* Dots Indicator */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'bg-cyan-400' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-6 mb-16">
-            <h2 className="display-large">Browse Categories</h2>
-            <p className="body-medium text-white/70 max-w-2xl mx-auto">
+          <div className="text-center space-y-6 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Browse Categories</h2>
+            <p className="text-lg text-white/70">
               Discover our complete range of premium mobile accessories
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
             {categories.map((category) => {
               const IconComponent = categoryIcons[category.name] || Battery;
               return (
                 <Link
                   key={category.id}
                   to={category.path}
-                  className="group text-center p-6 rounded-xl border border-white/10 bg-zinc-800/30 hover:border-cyan-400/50 hover:bg-zinc-700/30 transition-all duration-300"
+                  className="group text-center p-6 rounded-xl border border-white/10 bg-zinc-800/50 hover:border-cyan-400/50 hover:bg-zinc-700/50 transition-all duration-300"
                 >
-                  <div className="w-16 h-16 mx-auto mb-4 bg-zinc-700 rounded-full flex items-center justify-center group-hover:bg-cyan-400/20 transition-colors duration-300">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-zinc-700/50 rounded-full flex items-center justify-center group-hover:bg-cyan-400/20 transition-colors duration-300">
                     <IconComponent className="h-8 w-8 text-cyan-400" />
                   </div>
                   <h3 className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors duration-300">
@@ -151,14 +161,47 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Featured Products Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center space-y-6 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Featured Products</h2>
+            <p className="text-lg text-white/70">
+              Top-selling mobile accessories with premium quality at factory prices
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.map((product, index) => (
+              <div 
+                key={product.id}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to="/shop">
+              <Button className="btn-primary text-lg px-8 py-4 h-auto">
+                View All Products
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Newsletter Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
         <div className="max-w-4xl mx-auto text-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="display-medium">Stay Updated with Latest Products</h2>
-              <p className="body-medium text-white/70">
-                Be the first to know about new arrivals, special offers, and exclusive deals.
+              <h2 className="text-3xl md:text-4xl font-bold text-white">Stay Updated</h2>
+              <p className="text-lg text-white/70">
+                Subscribe for latest products, deals, and exclusive offers
               </p>
             </div>
             
