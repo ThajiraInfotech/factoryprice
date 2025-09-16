@@ -22,10 +22,16 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const root = document.documentElement;
+    
     if (isDark) {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
+      root.style.setProperty('--bg-primary', '#000000');
+      root.style.setProperty('--text-primary', '#FFFFFF');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
+      root.style.setProperty('--bg-primary', '#FFFFFF');
+      root.style.setProperty('--text-primary', '#000000');
     }
   }, [isDark]);
 
@@ -35,7 +41,9 @@ export const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      {children}
+      <div className={isDark ? 'dark' : 'light'}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };
