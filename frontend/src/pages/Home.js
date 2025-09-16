@@ -79,14 +79,17 @@ const Home = () => {
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <div className="relative w-full h-full bg-gradient-to-r from-black via-zinc-900 to-black">
-                <div className="absolute inset-0 bg-black/40"></div>
+              <div 
+                className="relative w-full h-full bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${slide.image})` }}
+              >
+                <div className="absolute inset-0 bg-black/50"></div>
                 <div className="relative z-10 flex items-center justify-center h-full">
                   <div className="text-center space-y-4">
-                    <h2 className="text-4xl md:text-6xl font-bold text-white">
+                    <h2 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
                       {slide.title}
                     </h2>
-                    <p className="text-xl md:text-2xl text-cyan-400 font-semibold">
+                    <p className="text-xl md:text-2xl text-cyan-400 font-semibold drop-shadow-lg">
                       {slide.subtitle}
                     </p>
                     <Link to="/shop">
