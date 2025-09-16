@@ -1,146 +1,152 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Star, Zap, Shield, Truck } from 'lucide-react';
-import ProductCard from '../components/ProductCard';
-import { products } from '../data/mockData';
+import { ChevronRight, Battery, Zap, Smartphone, Plug, Sparkles, Cable, Wallet } from 'lucide-react';
+import { categories } from '../data/mockData';
 import { Button } from '../components/ui/button';
 
 const Home = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const featuredProducts = products.slice(0, 3);
-
-  const features = [
-    {
-      icon: Zap,
-      title: "Factory Direct Pricing",
-      description: "Get the best prices directly from manufacturers"
-    },
-    {
-      icon: Shield,
-      title: "Quality Guaranteed", 
-      description: "All products come with warranty and quality assurance"
-    },
-    {
-      icon: Truck,
-      title: "Fast Delivery",
-      description: "Quick delivery across India with tracking"
-    }
-  ];
+  const categoryIcons = {
+    "Powerbanks": Battery,
+    "Wireless Chargers": Zap,
+    "Mobile Holder": Smartphone,
+    "Chargers": Plug,
+    "Gadget Cleaner": Sparkles,
+    "Cables": Cable,
+    "Phone Wallet": Wallet
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-blue-900/20"></div>
-        <div className="relative max-w-7xl mx-auto">
-          <div className="text-center space-y-8">
-            <div className="space-y-4">
-              <h1 className="display-huge animate-fade-in">
-                Premium Mobile Accessories
-                <span className="block text-cyan-400">at Factory Prices</span>
-              </h1>
-              <p className="body-large max-w-3xl mx-auto text-white/80 animate-fade-in-delayed">
-                Discover high-quality neckbands, power banks, and TWS earbuds directly from manufacturers. 
-                Experience superior quality without the premium markup.
-              </p>
-            </div>
+      {/* Hero Section with Large Product Display */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black"></div>
+        
+        {/* Main Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-screen py-32">
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-delayed-2">
-              <Link to="/shop">
-                <Button className="btn-primary text-lg px-8 py-4 h-auto">
-                  Shop Now
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link to="/about">
-                <Button className="btn-secondary text-lg px-8 py-4 h-auto">
-                  Learn More
-                </Button>
-              </Link>
+            {/* Left Side - Text Content */}
+            <div className="space-y-8 text-left lg:text-left">
+              <div className="space-y-6">
+                <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="block text-white">India's Favourite</span>
+                  <span className="block text-cyan-400">Mobile Accessories</span>
+                  <span className="block text-white text-4xl lg:text-5xl mt-4">starting from ₹749!</span>
+                </h1>
+                
+                <p className="text-xl text-white/80 max-w-2xl leading-relaxed">
+                  Premium quality neckbands, power banks, and TWS earbuds at factory prices. 
+                  Experience superior quality without the premium markup.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-6">
+                <Link to="/shop">
+                  <Button className="btn-primary text-xl px-10 py-5 h-auto text-black font-semibold">
+                    Shop Now
+                    <ChevronRight className="ml-3 h-6 w-6" />
+                  </Button>
+                </Link>
+                <Link to="/products">
+                  <Button className="btn-secondary text-xl px-10 py-5 h-auto">
+                    View Products
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-12 pt-8">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-cyan-400">50K+</div>
+                  <div className="text-white/70 text-lg">Happy Customers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-cyan-400">100+</div>
+                  <div className="text-white/70 text-lg">Products</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-cyan-400">99%</div>
+                  <div className="text-white/70 text-lg">Satisfaction</div>
+                </div>
+              </div>
             </div>
 
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-8 pt-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400">50K+</div>
-                <div className="text-white/70">Happy Customers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400">100+</div>
-                <div className="text-white/70">Products</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400">99%</div>
-                <div className="text-white/70">Satisfaction Rate</div>
+            {/* Right Side - Product Showcase */}
+            <div className="relative">
+              <div className="relative w-full h-96 lg:h-[600px] bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl overflow-hidden border border-white/10">
+                {/* Neon Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-transparent to-blue-500/10"></div>
+                <div className="absolute top-4 left-4 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-4 right-4 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl"></div>
+                
+                {/* Product Images Placeholder */}
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <div className="text-center space-y-8">
+                    <div className="relative">
+                      <div className="w-64 h-64 bg-gradient-to-br from-zinc-700 to-zinc-800 rounded-2xl flex items-center justify-center border border-cyan-400/30">
+                        <div className="text-center space-y-4">
+                          <div className="w-16 h-16 bg-cyan-400/20 rounded-xl mx-auto flex items-center justify-center">
+                            <Battery className="h-8 w-8 text-cyan-400" />
+                          </div>
+                          <div className="space-y-2">
+                            <h3 className="text-xl font-semibold text-white">Premium Accessories</h3>
+                            <p className="text-sm text-white/70">Neckbands • Power Banks • TWS Earbuds</p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Glow Ring Effect */}
+                      <div className="absolute inset-0 rounded-2xl border-2 border-cyan-400/50 animate-pulse"></div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="w-16 h-16 bg-zinc-700 rounded-lg flex items-center justify-center border border-white/10">
+                        <Zap className="h-6 w-6 text-cyan-400" />
+                      </div>
+                      <div className="w-16 h-16 bg-zinc-700 rounded-lg flex items-center justify-center border border-white/10">
+                        <Smartphone className="h-6 w-6 text-cyan-400" />
+                      </div>
+                      <div className="w-16 h-16 bg-zinc-700 rounded-lg flex items-center justify-center border border-white/10">
+                        <Battery className="h-6 w-6 text-cyan-400" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-6 mb-16">
-            <h2 className="display-large">Featured Products</h2>
-            <p className="body-medium text-white/70 max-w-2xl mx-auto">
-              Explore our top-selling mobile accessories, carefully selected for their 
-              quality, performance, and value.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product, index) => (
-              <div 
-                key={product.id} 
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <ProductCard 
-                  product={product} 
-                  onViewDetails={setSelectedProduct}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to="/shop">
-              <Button className="btn-primary text-lg px-8 py-4 h-auto">
-                View All Products
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
+      {/* Product Categories Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-6 mb-16">
-            <h2 className="display-large">Why Choose Factory Price?</h2>
+            <h2 className="display-large">Browse Categories</h2>
             <p className="body-medium text-white/70 max-w-2xl mx-auto">
-              We're committed to providing you with the best mobile accessories 
-              at unbeatable prices with exceptional service.
+              Discover our complete range of premium mobile accessories
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                className="text-center space-y-6 p-8 rounded-lg border border-white/10 bg-zinc-800/30 backdrop-blur-sm hover:border-cyan-400/50 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-400/10 border border-cyan-400/20">
-                  <feature.icon className="h-8 w-8 text-cyan-400" />
-                </div>
-                <h3 className="heading-2">{feature.title}</h3>
-                <p className="text-white/70">{feature.description}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
+            {categories.map((category) => {
+              const IconComponent = categoryIcons[category.name] || Battery;
+              return (
+                <Link
+                  key={category.id}
+                  to={category.path}
+                  className="group text-center p-6 rounded-xl border border-white/10 bg-zinc-800/30 hover:border-cyan-400/50 hover:bg-zinc-700/30 transition-all duration-300"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 bg-zinc-700 rounded-full flex items-center justify-center group-hover:bg-cyan-400/20 transition-colors duration-300">
+                    <IconComponent className="h-8 w-8 text-cyan-400" />
+                  </div>
+                  <h3 className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors duration-300">
+                    {category.name}
+                  </h3>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -148,11 +154,14 @@ const Home = () => {
       {/* Newsletter Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="space-y-6">
-            <h2 className="display-medium">Stay Updated</h2>
-            <p className="body-medium text-white/70">
-              Subscribe to our newsletter for the latest products, deals, and tech updates.
-            </p>
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h2 className="display-medium">Stay Updated with Latest Products</h2>
+              <p className="body-medium text-white/70">
+                Be the first to know about new arrivals, special offers, and exclusive deals.
+              </p>
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
               <input
                 type="email"
