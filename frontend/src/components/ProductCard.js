@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Star, ShoppingCart, Eye, Heart } from 'lucide-react';
 import { Button } from './ui/button';
+import { useTheme } from '../contexts/ThemeContext';
 
-const ProductCard = ({ product, onViewDetails }) => {
+const ProductCard = ({ product }) => {
+  const { isDark } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -10,12 +13,18 @@ const ProductCard = ({ product, onViewDetails }) => {
 
   return (
     <div 
-      className="group relative bg-zinc-900/50 backdrop-blur-sm rounded-lg overflow-hidden border border-white/10 transition-all duration-500 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/10"
+      className={`group relative rounded-lg overflow-hidden border transition-all duration-500 hover:shadow-2xl ${
+        isDark 
+          ? 'bg-zinc-900/50 border-white/10 hover:border-cyan-400/50 hover:shadow-cyan-400/10' 
+          : 'bg-white border-gray-200 hover:border-cyan-400/50 hover:shadow-cyan-400/10'
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Section */}
-      <div className="relative overflow-hidden bg-zinc-800">
+      <div className={`relative overflow-hidden transition-colors duration-300 ${
+        isDark ? 'bg-zinc-800' : 'bg-gray-100'
+      }`}>
         <img 
           src={product.image} 
           alt={product.name}
@@ -34,7 +43,9 @@ const ProductCard = ({ product, onViewDetails }) => {
           className={`absolute top-4 right-4 transition-all duration-300 ${
             isFavorite 
               ? 'text-red-500 bg-white/20' 
-              : 'text-white/70 bg-black/20 hover:text-red-500 hover:bg-white/20'
+              : isDark
+                ? 'text-white/70 bg-black/20 hover:text-red-500 hover:bg-white/20'
+                : 'text-gray-600 bg-white/20 hover:text-red-500 hover:bg-white/30'
           }`}
           onClick={() => setIsFavorite(!isFavorite)}
         >
@@ -46,18 +57,13 @@ const ProductCard = ({ product, onViewDetails }) => {
           isHovered ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="flex space-x-3">
-            <Button
-              size="sm"
-              className="btn-primary"
-              onClick={() => onViewDetails && onViewDetails(product)}
-            >
-              <Eye className="h-4 w-4 mr-2" />
-              View Details
-            </Button>
-            <Button
-              size="sm"
-              className="btn-secondary"
-            >
+            <Link to={`/product/${product.id}`}>
+              <Button size="sm" className="btn-primary">
+                <Eye className="h-4 w-4 mr-2" />
+                View Details
+              </Button>
+            </Link>
+            <Button size="sm" className="btn-secondary">
               <ShoppingCart className="h-4 w-4 mr-2" />
               Add to Cart
             </Button>
@@ -68,10 +74,14 @@ const ProductCard = ({ product, onViewDetails }) => {
       {/* Content Section */}
       <div className="p-6 space-y-4">
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors duration-300">
+          <h3 className={`text-xl font-semibold group-hover:text-cyan-400 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-black'
+          }`}>
             {product.name}
           </h3>
-          <p className="text-white/70 text-sm line-clamp-2">
+          <p className={`text-sm line-clamp-2 transition-colors duration-300 ${
+            isDark ? 'text-white/70' : 'text-gray-600'
+          }`}>
             {product.description}
           </p>
         </div>
@@ -86,7 +96,11 @@ const ProductCard = ({ product, onViewDetails }) => {
               />
             ))}
           </div>
-          <span className="text-white/70 text-sm">(4.8)</span>
+          <span className={`text-sm transition-colors duration-300 ${
+            isDark ? 'text-white/70' : 'text-gray-600'
+          }`}>
+            (4.8)
+          </span>
         </div>
 
         {/* Price Section */}
@@ -96,7 +110,9 @@ const ProductCard = ({ product, onViewDetails }) => {
               <span className="text-2xl font-bold text-cyan-400">
                 ₹{product.price.toLocaleString()}
               </span>
-              <span className="text-lg text-white/50 line-through">
+              <span className={`text-lg line-through transition-colors duration-300 ${
+                isDark ? 'text-white/50' : 'text-gray-500'
+              }`}>
                 ₹{product.originalPrice.toLocaleString()}
               </span>
             </div>
@@ -108,12 +124,11 @@ const ProductCard = ({ product, onViewDetails }) => {
 
         {/* Action Buttons */}
         <div className="flex space-x-3 pt-4">
-          <Button 
-            className="btn-primary flex-1"
-            onClick={() => onViewDetails && onViewDetails(product)}
-          >
-            View Details
-          </Button>
+          <Link to={`/product/${product.id}`} className="flex-1">
+            <Button className="btn-primary w-full">
+              View Details
+            </Button>
+          </Link>
           <Button className="btn-secondary px-6">
             <ShoppingCart className="h-4 w-4" />
           </Button>
